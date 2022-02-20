@@ -1,10 +1,17 @@
 "use strict";
-const {moduleInterop} = require("@textlint/module-interop");
+const { moduleInterop } = require("@textlint/module-interop");
+const presetJapanese = moduleInterop(require("textlint-rule-preset-japanese"));
+
 module.exports = {
-    rules: {
-        "preset-japanese": moduleInterop(require("textlint-rule-preset-japanese")),
-        "prh": moduleInterop(require("textlint-rule-prh")),
+  ...presetJapanese,
+  rules: {
+    ...presetJapanese.rules,
+    "prh": moduleInterop(require("textlint-rule-prh")),
+  },
+  rulesConfig: {
+    ...presetJapanese.rulesConfig,
+    "prh": {
+      "rulePaths" :["prh.yml"]
     },
-    rulesConfig: {
-    }
+  },
 };
